@@ -1,0 +1,65 @@
+.container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+.listCard {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  height: 51px;
+  width: inherit;
+  position: relative;
+}
+.listCard:hover {
+  background: rgb(var(--background-start-rgb));
+  animation: ease-in listCardHover;
+}
+
+.list {
+  background: white;
+}
+.searchBarError {
+  width: 251px;
+  height: 39px;
+  border: 1px solid black;
+}
+.submitButton {
+  width: 63px;
+  height: 39px;
+  background: white;
+  border: 1px solid black;
+}
+.searchBar {
+  width: 251px;
+  height: 39px;
+  border: 1px solid black;
+}
+.searchBarContainer {
+  display: flex;
+  width: inherit;
+  gap: 5px;
+  flex-shrink: 1;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  flex-shrink: 1;
+}
+@keyframes listCardHover {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: rgb(var(--background-start-rgb));
+  }
+}
+@media (max-width: 768px) {
+  .form {
+    flex-direction: column;
+  }
+}
