@@ -11,9 +11,9 @@ const pokeDex = axios.create({
   baseURL: POKEAPIDOMAINURL,
   signal: pokeDexSignal.signal,
 });
-const apolloDriver = (query: DocumentNode, variables: any = "") => {
-  return useQuery(query, variables);
-};
+// const apolloDriver = (query: DocumentNode, variables: any = "") => {
+//   return useQuery(query, variables);
+// };
 class PokeDexClass {
   /**
    *Async function
@@ -21,7 +21,7 @@ class PokeDexClass {
    * @param {(string | number)} search - a number id or relative name of pokemon to search for
    * @returns
    */
-  public searchPokemon = (search: string) => {
+  public searchPokemon = (search?: string) => {
     const query = gql`
       query searchPokemonGQL($search: String!) {
         pokemon_v2_pokemon(

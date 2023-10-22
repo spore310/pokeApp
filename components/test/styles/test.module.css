@@ -1,61 +1,84 @@
 .container {
-  width: 300px;
+  width: 350px;
   display: flex;
+  border-radius: 16px;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   gap: 0px;
 }
+
 .listCard {
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 50px;
   height: 51px;
+  padding: 0 8px;
+  border-radius: 16px;
   width: inherit;
   position: relative;
 }
-.listCard:hover {
-  background: rgb(var(--background-start-rgb));
-  animation: ease-in listCardHover;
-}
-
-.list {
-  background: white;
+.listCard:active {
 }
 .searchBarError {
-  width: 251px;
-  height: 39px;
-  border: 1px solid black;
+  width: inherit;
+  height: inherit;
+}
+.searchImageRotate {
+  animation: pokeballRotate 1.5s infinite linear;
 }
 .submitButton {
-  width: 63px;
-  height: 39px;
-  background: white;
-  border: 1px solid black;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.searchImage:hover {
+  animation: pokeballRotate 1.5s infinite linear;
+}
+.searchBarTouched {
+  width: inherit;
+  height: inherit;
 }
 .searchBar {
-  width: 251px;
-  height: 39px;
-  border: 1px solid black;
+  width: inherit;
+  height: inherit;
+}
+.searchBarError {
+  width: inherit;
+  height: inherit;
 }
 .searchBarContainer {
   display: flex;
   width: inherit;
   gap: 5px;
+  padding: 7px 11px;
   flex-shrink: 1;
+  position: relative;
+  z-index: 5;
 }
 .form {
   display: flex;
   flex-direction: column;
-  width: inherit;
+  width: 350px;
   flex-shrink: 1;
 }
-@keyframes listCardHover {
+
+@keyframes pokeballRotate {
   from {
-    background-color: white;
+    transform: rotate(0);
   }
   to {
-    background-color: rgb(var(--background-start-rgb));
+    transform: rotate(365deg);
+  }
+}
+@keyframes pokeballTurn {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(0.25turn);
   }
 }
 @media (max-width: 768px) {

@@ -1,12 +1,14 @@
 "use client";
 import Image from "next/image";
 import styles from "./styles/test.module.css";
-import { POKEAPIDOMAINURL, PokeDex } from "../../lib/pokemonDatasource";
+import { PokeDex } from "../../lib/pokemonDatasource";
 import { upperCaseString } from "../../lib/lib";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { FC, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Paper, TextField, Card, Box, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 interface Values {
   search: string;
 }
@@ -21,6 +23,7 @@ const nameSchema = Yup.object().shape({
 const Test = () => {
   const [showSuggestion, toggleSuggestion] = useState<boolean>(false);
   const router = useRouter();
+  const theme = useTheme();
   const [refetch, { data, loading, error }] = PokeDex.searchPokemon(" ");
   const handleOnChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -35,15 +38,34 @@ const Test = () => {
     toggleSuggestion(true);
     await refetch({ variables: { search: value } });
   };
-  const LoadingCard = (): React.ReactNode => (
-    <div className={styles.listCard}>{"loading"}</div>
-  );
 
   const pokemon = data?.["pokemon_v2_pokemon"]?.map((pokemon: any) => {
+    if (!pokemon?.name) return;
     const name = upperCaseString(pokemon?.name);
     return (
-      <li key={`${pokemon?.id}`} className={styles.listCard}>
-        <p id={`${name}`}>{`${name}`}</p>
+      <Card
+        key={`${pokemon?.id}`}
+        className={styles.listCard}
+        variant="outlined"
+        color={"primary"}
+        component="li"
+        onClick={(e) => {
+          router.push(`/?search=${pokemon?.name}`);
+        }}
+        sx={{
+          "&:hover": {
+            backgroundColor: theme.palette.text.secondary,
+          },
+        }}
+      >
+        <Typography
+          variant="body2"
+          component="p"
+          className={styles.pokeName}
+          noWrap
+        >
+          {name}
+        </Typography>
 
         <Image
           alt={`photo of ${pokemon?.name}`}
@@ -52,12 +74,12 @@ const Test = () => {
           height={45}
           width={50}
         />
-      </li>
+      </Card>
     );
   });
 
   return (
-    <div className={styles.container}>
+    <Paper component="div" elevation={8} className={styles.container}>
       <Formik
         initialValues={{
           search: "",
@@ -66,22 +88,34 @@ const Test = () => {
         validateOnChange={true}
         validateOnBlur={true}
         onSubmit={async (values: Values, { setSubmitting }) => {
-          router.replace(`/?search=${values.search}`);
-          console.log(values);
+          router.replace(`/${values.search ? `?search=${values.search}` : ``}`);
         }}
       >
-        {({ errors, touched, setFieldValue, isSubmitting }) => (
-          <Form className={styles.form}>
+        {({
+          errors,
+          touched,
+          values,
+          setFieldValue,
+          isSubmitting,
+          resetForm,
+        }) => (
+          <Form
+            onBlur={(e) => {
+              setTimeout(() => toggleSuggestion(false), 100);
+            }}
+            className={styles.form}
+          >
             <div className={styles.searchBarContainer}>
-              <Field
+              <TextField
                 name="search"
-                id="search"
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-                  toggleSuggestion(false)
-                }
-                onFocus={(e: React.FocusEvent<HTMLInputElement>) =>
-                  toggleSuggestion(true)
-                }
+                id="searchField"
+                autoComplete="off"
+                aria-autocomplete="none"
+                variant="standard"
+                value={values.search}
+                onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
+                  toggleSuggestion(true);
+                }}
                 className={
                   errors.search
                     ? styles.searchBarError
@@ -93,21 +127,53 @@ const Test = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleOnChange(e, setFieldValue)
                 }
-                maxLength={30}
-                min={0}
+                color={"secondary"}
+                InputProps={{
+                  endAdornment: (
+                    <button className={styles.submitButton} type="submit">
+                      {
+                        <Image
+                          src={"/pokeball-small.png"}
+                          alt={"small pokeball.png"}
+                          className={
+                            isSubmitting
+                              ? styles.searchImageRotate
+                              : styles.searchImage
+                          }
+                          height={50}
+                          width={50}
+                        />
+                      }
+                    </button>
+                  ),
+                }}
               />
-              <button className={styles.submitButton} type="submit">
-                {isSubmitting ? "loading..." : "Search"}
-              </button>
             </div>
-            <ul id="searchBar" className={styles.list}>
-              {showSuggestion && !loading ? pokemon : null}
-              {loading && <LoadingCard />}
-            </ul>
+            <Box
+              id="searchBar"
+              component="ul"
+              className={styles.list}
+              sx={{ width: 350 }}
+            >
+              {showSuggestion && !loading && pokemon?.length > 0 ? (
+                pokemon
+              ) : loading && showSuggestion ? (
+                <Typography
+                  variant="body1"
+                  component="span"
+                  align="center"
+                  noWrap
+                >
+                  {"loading..."}
+                </Typography>
+              ) : error?.message ? (
+                "error"
+              ) : null}
+            </Box>
           </Form>
         )}
       </Formik>
-    </div>
+    </Paper>
   );
 };
 
