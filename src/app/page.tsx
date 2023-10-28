@@ -1,10 +1,7 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { PokeDex } from "../../lib/pokemonDatasource";
-import Test from "../../components/test/test";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import SearchBar from "../../components/SearchBar/SearchBar";
 export default function Home() {
   const darkTheme = createTheme({
     palette: {
@@ -15,7 +12,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Test />
+        <SearchBar />
       </ThemeProvider>
     </main>
   );
