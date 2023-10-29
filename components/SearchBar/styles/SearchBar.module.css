@@ -5,7 +5,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  position: relative;
+  left: 10px;
+  z-index: 100;
   gap: 0px;
 }
 
@@ -71,9 +73,13 @@
   flex-direction: column;
   width: inherit;
   flex-shrink: 1;
+  position: relative;
 }
+
 .list {
   width: inherit;
+  position: absolute;
+  top: 42px;
 }
 
 @keyframes pokeballRotate {
@@ -98,6 +104,6 @@
     flex-direction: column;
   }
   .container {
-    width: 266px;
+    width: 169px;
   }
 }
