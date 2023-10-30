@@ -123,7 +123,12 @@ const SearchBar: React.FC = () => {
                       </button>
                       {!!showSuggestion && (
                         <button
-                          onClick={() => toggleSuggestion((prev) => !prev)}
+                          aria-hidden={!showSuggestion}
+                          aria-haspopup="true"
+                          onClick={() => {
+                            toggleSuggestion((prev) => !prev);
+                            setFieldValue("search", "");
+                          }}
                         >
                           <CloseOutlinedIcon color={"secondary"} />
                         </button>

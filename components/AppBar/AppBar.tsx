@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import styles from "./styles/AppBar.module.css";
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SearchBar from "../SearchBar/SearchBar";
 import Link from "next/link";
+import SettingsMenu from "./SettingsMenu/SettingsMenu";
 export const AppBar = () => {
   return (
     <AppBarMui className={styles.container}>
@@ -22,8 +22,12 @@ export const AppBar = () => {
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}`}>
-          <IconButton edge={"start"} size={"large"} color={"primary"}>
+        <Link
+          aria-label="Home page link"
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}`}
+          className={styles.iconButton}
+        >
+          <IconButton edge={"start"} size={"large"} color={"success"}>
             <OtherHousesOutlinedIcon />
           </IconButton>
         </Link>
@@ -32,9 +36,7 @@ export const AppBar = () => {
         </Typography>
       </Stack>
       <SearchBar />
-      <IconButton edge="end" size="large" color="primary">
-        <SettingsOutlinedIcon />
-      </IconButton>
+      <SettingsMenu />
     </AppBarMui>
   );
 };
