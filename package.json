@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "dockerBuild": "docker rm -f pokeApp && docker build -f DockerFile.dev -t poke-app-test ./ && docker run -d -p 3000:3000 --name pokeApp poke-app-test",
+    "dockerInit": "docker rm -f pokeApp",
+    "docker": "npm run dockerInit && npm run dockerBuild",
     "lint": "next lint"
   },
   "dependencies": {

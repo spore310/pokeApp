@@ -15,28 +15,30 @@ import SettingsMenu from "./SettingsMenu/SettingsMenu";
 export const AppBar = () => {
   return (
     <AppBarMui className={styles.container}>
-      <Stack
-        direction={"row"}
-        spacing={1}
-        divider={<Divider orientation="vertical" flexItem />}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <Link
-          aria-label="Home page link"
-          href={`${process.env.NEXT_PUBLIC_BASE_URL}`}
-          className={styles.iconButton}
+      <Stack direction={"row"} justifyContent={"space-between"}>
+        <Stack
+          direction={"row"}
+          spacing={1}
+          divider={<Divider orientation="vertical" flexItem />}
+          alignItems={"center"}
+          justifyContent={"center"}
         >
-          <IconButton edge={"start"} size={"large"} color={"success"}>
-            <OtherHousesOutlinedIcon />
-          </IconButton>
-        </Link>
-        <Typography component={"div"} variant={"body1"}>
-          {"Pokedex"}
-        </Typography>
+          <Link
+            aria-label="Home page link"
+            href={`${process.env.NEXT_PUBLIC_BASE_URL}`}
+            className={styles.iconButton}
+          >
+            <IconButton edge={"start"} size={"large"} color={"success"}>
+              <OtherHousesOutlinedIcon />
+            </IconButton>
+          </Link>
+          <Typography component={"div"} variant={"body1"}>
+            {"Pokedex"}
+          </Typography>
+        </Stack>
+        <SearchBar />
+        <SettingsMenu />
       </Stack>
-      <SearchBar />
-      <SettingsMenu />
     </AppBarMui>
   );
 };

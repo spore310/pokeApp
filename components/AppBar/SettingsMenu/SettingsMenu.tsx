@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { toogleLightMode } from "../../../lib/redux/slices/themeSlice";
 const SettingsMenu = () => {
   const dispatch = usePokeAppDispatch();
-  const theme = usePokeAppSelector((state) => state.theme.themeMode.mode);
   const [settingsRef, settingsState] = useState<HTMLElement | null>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     settingsState(event.currentTarget);
