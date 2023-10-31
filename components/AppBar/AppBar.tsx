@@ -15,7 +15,11 @@ import SettingsMenu from "./SettingsMenu/SettingsMenu";
 export const AppBar = () => {
   return (
     <AppBarMui className={styles.container}>
-      <Stack direction={"row"} justifyContent={"space-between"}>
+      <Stack
+        direction={"row"}
+        sx={{ width: "inherit" }}
+        justifyContent={"space-between"}
+      >
         <Stack
           direction={"row"}
           spacing={1}

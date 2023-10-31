@@ -21,7 +21,7 @@ const SettingsMenu = () => {
     settingsState(null);
   };
   const toogleDarkMode = () => {
-    dispatch(toogleLightMode(""));
+    dispatch(toogleLightMode());
     handleClose();
   };
   return (
