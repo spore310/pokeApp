@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { ApolloWrapper } from "../../components/ApolloWrapper/ApolloWrapper";
 import { Roboto } from "next/font/google";
 export const metadata: Metadata = {
   title: "PokeApp | Pokedex",
@@ -19,9 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ApolloWrapper>
-        <body className={roboto.className}>{children}</body>
-      </ApolloWrapper>
+      {/* <ApolloWrapper> */}
+      <body className={roboto.className}>{children}</body>
+      {/* </ApolloWrapper> */}
     </html>
   );
 }

@@ -20,7 +20,7 @@ interface Props {
 export const SearchBarSuggestionItem = ({
   pokemon,
   toogleSuggestion,
-  setNewValue,
+
   reset,
 }: Props) => {
   const router = useRouter();

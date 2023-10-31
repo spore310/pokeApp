@@ -50,7 +50,7 @@ const SearchBar: React.FC = () => {
         validationSchema={nameSchema}
         validateOnChange={true}
         validateOnBlur={true}
-        onSubmit={async (values: Values, { setSubmitting }) => {
+        onSubmit={async (values: Values) => {
           router.replace(`/${values.search ? `?search=${values.search}` : ``}`);
         }}
       >
@@ -123,7 +123,12 @@ const SearchBar: React.FC = () => {
                       </button>
                       {!!showSuggestion && (
                         <button
-                          onClick={() => toggleSuggestion((prev) => !prev)}
+                          aria-hidden={!showSuggestion}
+                          aria-haspopup="true"
+                          onClick={() => {
+                            toggleSuggestion((prev) => !prev);
+                            setFieldValue("search", "");
+                          }}
                         >
                           <CloseOutlinedIcon color={"secondary"} />
                         </button>
