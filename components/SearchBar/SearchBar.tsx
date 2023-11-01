@@ -167,7 +167,6 @@ const SearchBar: React.FC = () => {
                 <li className={styles.loadingSuggestionContainer}>
                   <AutorenewOutlinedIcon
                     aria-label="loading suggestion results"
-                    aria-role="status"
                     color="secondary"
                     className={styles.suggestionLoading}
                   />
