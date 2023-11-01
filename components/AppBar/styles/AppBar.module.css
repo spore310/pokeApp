@@ -1,0 +1,14 @@
+.container {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  padding: 5px 15px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.iconButton {
+  height: 50px;
+  width: 50px;
+}

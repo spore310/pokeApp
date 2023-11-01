@@ -17,9 +17,8 @@ const pokeDex = axios.create({
 class PokeDexClass {
   /**
    *Async function
-   * returns a list of pokemon that matches the input by the user in the search field of the pokedex. Can return undefined
    * @param {(string | number)} search - a number id or relative name of pokemon to search for
-   * @returns
+   * @returns a list of pokemon that matches the input by the user in the search field of the pokedex. Can return undefined
    */
   public searchPokemon = (search?: string) => {
     const query = gql`

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import styles from "./styles/test.module.css";
+import styles from "./styles/SearchBar.module.css";
 import { PokeDex } from "../../lib/pokemonDatasource";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -23,7 +23,7 @@ const nameSchema = Yup.object().shape({
     .matches(/[A-Za-z \-]/, "Does not match format"),
 });
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
   const [showSuggestion, toggleSuggestion] = useState<boolean>(false);
   const router = useRouter();
   const [refetch, { data, loading, error }] = PokeDex.searchPokemon(" ");
@@ -41,17 +41,6 @@ const SearchBar = () => {
     await refetch({ variables: { search: value } });
   };
 
-  // const pokemon = data?.["pokemon_v2_pokemon"]?.map((pokemon: pokemon) => {
-  //   if (!pokemon?.name) return;
-  //   return (
-  //     <SearchBarSuggestionItem
-  //       key={pokemon.id}
-  //       toogleSuggestion={toggleSuggestion}
-  //       pokemon={pokemon}
-  //     />
-  //   );
-  // });
-
   return (
     <Paper component="div" elevation={8} className={styles.container}>
       <Formik
@@ -61,7 +50,7 @@ const SearchBar = () => {
         validationSchema={nameSchema}
         validateOnChange={true}
         validateOnBlur={true}
-        onSubmit={async (values: Values, { setSubmitting }) => {
+        onSubmit={async (values: Values) => {
           router.replace(`/${values.search ? `?search=${values.search}` : ``}`);
         }}
       >
@@ -74,8 +63,14 @@ const SearchBar = () => {
           resetForm,
         }) => (
           <Form
-            className={styles.form}
+            className={[
+              styles.form,
+              showSuggestion ? styles.formTouched : null,
+            ].join(" ")}
             tabIndex={-1}
+            onBlur={(e) => {
+              setTimeout(() => toggleSuggestion(false), 200);
+            }}
             name="Pokedex search bar"
             aria-label="Pokedex search bar container"
           >
@@ -128,7 +123,12 @@ const SearchBar = () => {
                       </button>
                       {!!showSuggestion && (
                         <button
-                          onClick={() => toggleSuggestion((prev) => !prev)}
+                          aria-hidden={!showSuggestion}
+                          aria-haspopup="true"
+                          onClick={() => {
+                            toggleSuggestion((prev) => !prev);
+                            setFieldValue("search", "");
+                          }}
                         >
                           <CloseOutlinedIcon color={"secondary"} />
                         </button>
