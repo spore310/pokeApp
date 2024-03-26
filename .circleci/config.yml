@@ -11,5 +11,5 @@ workflows:
           create-repo: true
           dockerfile: Dockerfile.prod
           path: .
-          repo: pokeappHome
+          repo: pokeapp
           tag: "$CIRCLE_SHA1"
