@@ -1,4 +1,5 @@
 version: 2.1
+
 parameters:
   is_pr:
     type: boolean
@@ -8,9 +9,8 @@ orbs:
   aws-ecr: circleci/aws-ecr@8.1.3
 
 workflows:
-  whence-pr:
-    when: << pipeline.parameters.is_pr >>
   build_and_push_image:
+    when: << pipeline.parameters.is_pr >>
     jobs:
       - aws-ecr/build-and-push-image:
           context: aws-dev
