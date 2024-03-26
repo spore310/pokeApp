@@ -10,6 +10,6 @@ workflows:
           context: aws-dev
           create-repo: true
           dockerfile: Dockerfile.prod
-          path: .
+          path: /.
           repo: pokeappHome
           tag: "$CIRCLE_SHA1"
