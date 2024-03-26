@@ -6,7 +6,11 @@ import { ReduxProviders } from "../redux/provider";
 import { usePokeAppDispatch, usePokeAppSelector } from "../redux/Hooks";
 import { useEffect, useState } from "react";
 import { hydrateLightMode } from "../redux/slices/themeSlice";
-
+declare module "@mui/material/Paper" {
+  interface PaperPropsVariantOverrides {
+    pokeDexSearch: true;
+  }
+}
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const theme = usePokeAppSelector((state) => state.theme.themeMode.mode);
   const dispatch = usePokeAppDispatch();
@@ -27,6 +31,14 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
       },
     },
     components: {
+      MuiPaper: {
+        variants: [
+          {
+            props: { variant: "pokeDexSearch" },
+            style: {},
+          },
+        ],
+      },
       MuiAppBar: {
         styleOverrides: {
           root: {

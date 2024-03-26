@@ -29,7 +29,7 @@ export const AppBar = () => {
         >
           <Link
             aria-label="Home page link"
-            href={`${process.env.NEXT_PUBLIC_BASE_URL}`}
+            href={`/`}
             className={styles.iconButton}
           >
             <IconButton edge={"start"} size={"large"} color={"success"}>

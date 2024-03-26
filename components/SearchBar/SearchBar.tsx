@@ -173,7 +173,7 @@ const SearchBar: React.FC = () => {
                   />
                 </li>
               ) : error?.message ? (
-                "error"
+                error?.message
               ) : null}
             </Box>
           </Form>

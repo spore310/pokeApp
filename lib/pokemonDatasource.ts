@@ -62,6 +62,31 @@ class PokeDexClass {
       variables: { search, offset },
     });
   };
+  public pokeDexLoadMoreSearch = (search: string, offset: number) => {
+    const query = gql`
+      query searchPokemonLoadMoreGQL($search: String!, $offset: Int!) {
+        pokemon_v2_pokemon(
+          where: { name: { _iregex: $search }, id: { _lt: 1095 } }
+          limit: 10
+          offset: $offset
+        ) {
+          name
+          id
+          height
+          weight
+          base_experience
+          pokemon_v2_pokemontypes {
+            pokemon_v2_type {
+              name
+            }
+          }
+        }
+      }
+    `;
+    return useLazyQuery(query, {
+      variables: { search, offset },
+    });
+  };
 }
 export const PokeDex = new PokeDexClass();
 export default pokeDex;
