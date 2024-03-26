@@ -51,7 +51,7 @@ const SearchBar: React.FC = () => {
         validateOnChange={true}
         validateOnBlur={true}
         onSubmit={async (values: Values) => {
-          router.replace(`/${values.search ? `?search=${values.search}` : ``}`);
+          router.push(`/${values.search ? `?search=${values.search}` : ``}`);
         }}
       >
         {({
@@ -109,7 +109,8 @@ const SearchBar: React.FC = () => {
                       <button className={styles.submitButton} type="submit">
                         {
                           <Image
-                            src={pokeballImage}
+                            src={"/pokeball.png"}
+                            priority
                             alt={"small pokeball picture"}
                             className={
                               isSubmitting

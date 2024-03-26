@@ -26,7 +26,6 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         default: "#F5F5DC",
       },
     },
-    typography: {},
     components: {
       MuiAppBar: {
         styleOverrides: {

@@ -1,6 +1,5 @@
 import { AppBar } from "../../components/AppBar/AppBar";
 import HomePageBody from "../../components/HomePageBody/Index";
-import GlobalProvider from "../../lib/GlobalProvider/ReduxWrapper";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "PokeApp | Pokedex",
@@ -8,11 +7,9 @@ export const metadata: Metadata = {
 };
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 h-100">
-      <GlobalProvider>
-        <AppBar />
-        <HomePageBody />
-      </GlobalProvider>
+    <main className="flex min-h-screen flex-col items-center justify-between  h-100">
+      <AppBar />
+      <HomePageBody />
     </main>
   );
 }
