@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { upperCaseString } from "../../lib/lib";
 import styles from "./styles/searchBarSuggestionItem.module.css";
 import { pokemon } from "../../lib/types";
-import type { useLazyQuery } from "@apollo/client";
 interface Props {
   pokemon: pokemon;
   toogleSuggestion: Dispatch<SetStateAction<boolean>>;
@@ -30,9 +29,12 @@ export const SearchBarSuggestionItem = ({
     router.push(`/?search=${pokemon?.name}`);
   };
   const name = upperCaseString(pokemon?.name);
+  const loaderProp = ({ src }: any) => {
+    return src;
+  };
   return (
     <Card
-      key={`${pokemon?.id}`}
+      key={`${pokemon?.id}//${name}`}
       className={styles.listCard}
       variant="outlined"
       aria-label={`Suggestion list item for ${name} `}
@@ -69,6 +71,7 @@ export const SearchBarSuggestionItem = ({
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon?.id}.png`}
         quality={100}
         height={45}
+        loader={loaderProp}
         width={50}
       />
     </Card>

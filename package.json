@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "dockerBuild": "docker rm -f pokeApp && docker build -f DockerFile.dev -t poke-app-test ./ && docker run -d -p 3000:3000 --name pokeApp poke-app-test",
+    "start": "next start ",
+    "prod": "next build && next start",
+    "dockerBuild": "docker build -f DockerFile.prod -t poke-app-test ./ && docker run -d -p 3000:3000 --name pokeApp poke-app-test",
     "dockerInit": "docker rm -f pokeApp",
     "docker": "npm run dockerInit && npm run dockerBuild",
     "lint": "next lint"
@@ -21,6 +22,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
     "formik": "^2.4.5",
+    "graphql": "^16.8.1",
     "next": "^13.5.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",

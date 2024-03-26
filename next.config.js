@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/pokedex",
+  output: "standalone",
   images: {
     remotePatterns: [
       {
