@@ -77,7 +77,6 @@ const HomePageBody = () => {
       console.log("hit2");
       toogleOffSetFlag(false);
     }
-    //d
     fetchMore({
       variables: {
         search: parsedSearch,
