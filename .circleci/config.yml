@@ -12,4 +12,4 @@ workflows:
           dockerfile: DockerFile.prod
           path: .
           repo: pokeapp
-          tag: "$CIRCLE_SHA1"
+          tag: "latest, $CIRCLE_SHA1"
