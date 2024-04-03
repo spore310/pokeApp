@@ -22,6 +22,6 @@ workflows:
             - aws-cli/setup:
               profile-name: circle-ci-pokeapp
               role: arn:aws:iam::730335586083:user/circle-ci-pokeapp
-          cluster-name: ${AWS_RESOURCE_NAME_PREFIX}-cluster
+          cluster: ${AWS_RESOURCE_NAME_PREFIX}-cluster
           container-image-name-updates: container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}
           family: ${AWS_RESOURCE_NAME_PREFIX}-service
