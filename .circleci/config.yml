@@ -25,4 +25,3 @@ workflows:
           cluster: ${AWS_RESOURCE_NAME_PREFIX}-cluster
           container_image_name_updates: container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}
           family: ${AWS_RESOURCE_NAME_PREFIX}-service
-          profile: circle-ci-pokeapp
