@@ -12,7 +12,7 @@ workflows:
           create-repo: true
           dockerfile: DockerFile.prod
           path: .
-          repo: pokeapp
+          repo: "${AWS_RESOURCE_NAME_PREFIX}"
           tag: "$CIRCLE_SHA1"
       - aws-ecs/deploy-service-update:
           requires:
